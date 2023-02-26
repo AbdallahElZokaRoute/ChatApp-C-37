@@ -27,11 +27,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         viewModel.passwordError.observe(this) {
             viewDataBinding.passwordLayout.error = it
         }
-        viewModel.messageLiveData.observe(this) {
-            showDialogMessage(
-                it, "OK"
-            ) { dialog, which -> dialog.dismiss() }
-        }
         viewModel.navigator = this
     }
 

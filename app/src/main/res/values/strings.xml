@@ -20,4 +20,13 @@
     <string name="create_account">Create Account</string>
     <string name="register">Register</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="loading">Loading</string>
+    <string name="title_activity_add_room">AddRoomActivity</string>
+    <string name="add_room">Add Room</string>
+    <string name="room_name">Room name</string>
+    <string name="room_description">Room Description</string>
+    <string name="rooms">Rooms</string>
+    <string name="create">Create</string>
+    <string name="send">Send</string>
+    <string name="type_message_here">Type your message here...</string>
 </resources>

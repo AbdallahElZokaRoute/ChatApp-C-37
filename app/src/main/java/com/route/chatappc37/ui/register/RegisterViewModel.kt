@@ -6,7 +6,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.route.chatappc37.checkEmail
+import com.route.chatappc37.database.addUser
 import com.route.chatappc37.model.AppUser
+import com.route.chatappc37.model.DataUtils
 import com.route.chatappc37.ui.base.BaseViewModel
 
 //sealed class RegisterIntents {
@@ -85,18 +87,17 @@ class RegisterViewModel : BaseViewModel<Navigator>() {
     }
 
     private fun addUserToFireStore(uid: String?) {
-        FirebaseFirestore.getInstance()
-            .collection(AppUser.COLLECTION_NAME)
-            .document(uid!!)
-            .set(AppUser(uid, firstName.value, lastName.value, email.value))
-            .addOnSuccessListener {
-                //navigate To Home
-                navigator?.navigateToHome()
-
-            }.addOnFailureListener {
-                messageLiveData.value = it.message
-            }
-
+        showProgressBar.value = true
+        val user = AppUser(uid, firstName.value, lastName.value, email.value)
+        addUser(uid, user, onSuccessListener = {
+            //navigate To Home
+            showProgressBar.value = false
+            DataUtils.user = user
+            navigator?.navigateToHome()
+        }, onFailureListener = {
+            showProgressBar.value = false
+            messageLiveData.value = it.message
+        })
     }
 
     fun validateInputs(): Boolean {

@@ -17,19 +17,20 @@
         tools:context=".ui.login.LoginActivity">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:elevation="0dp"
-            android:theme="@style/TransparentToolbar">
+            android:outlineProvider="@null"
+            android:stateListAnimator="@null">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@null"
-                android:elevation="0dp"
-                android:theme="@style/TransparentToolbar">
+                android:background="@android:color/transparent"
+                android:elevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

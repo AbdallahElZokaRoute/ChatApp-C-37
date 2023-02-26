@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.route.chatappc37.checkEmail
+import com.route.chatappc37.database.getUser
+import com.route.chatappc37.model.AppUser
+import com.route.chatappc37.model.DataUtils
 import com.route.chatappc37.ui.base.BaseViewModel
 
 class LoginViewModel : BaseViewModel<Navigator>() {
@@ -22,14 +25,24 @@ class LoginViewModel : BaseViewModel<Navigator>() {
     }
 
     fun authEmailAndPassword() {
+        showProgressBar.value = true
         auth.signInWithEmailAndPassword(email.value!!, password.value!!)
             .addOnCompleteListener { task ->
+                showProgressBar.value = false
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
 
                     val user = auth.currentUser
                     Log.e("Firebase", "authEmailAndPassword: Success")
-                    navigator?.navigateToHome()
+                    getUser(user?.uid!!, onSuccessListener = { doc ->
+                        val docUser = doc.toObject(AppUser::class.java)
+                        DataUtils.user = docUser
+                        navigator?.navigateToHome()
+                    }, onFailureListener = {
+                        messageLiveData.value = it.localizedMessage
+                    })
+
+
                 } else {
                     // If sign in fails, display a message to the user.
                     messageLiveData.value = task.exception?.message//"Invalid email or password"

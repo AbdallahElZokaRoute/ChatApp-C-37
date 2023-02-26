@@ -30,10 +30,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Navi
             startActivity(intent)
 
         }
-        viewModel.messageLiveData.observe(this) {
-            showDialogMessage(it, "OK") { dialog, which -> dialog.dismiss() }
-
-        }
         viewModel.navigator = this
     }
 

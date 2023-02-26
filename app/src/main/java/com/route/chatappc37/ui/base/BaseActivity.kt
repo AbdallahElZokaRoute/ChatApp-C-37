@@ -9,15 +9,30 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.route.chatappc37.R
+import com.route.chatappc37.ui.loading.LoadingDialog
 
-abstract class BaseActivity<DATA_BINDING : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<DATA_BINDING : ViewDataBinding, VM : BaseViewModel<*>> :
+    AppCompatActivity() {
     lateinit var viewDataBinding: DATA_BINDING
     lateinit var viewModel: VM
-
+    lateinit var loadingDialog: LoadingDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
         viewModel = initViewModel()
+        loadingDialog = LoadingDialog()
+        viewModel.messageLiveData.observe(this) {
+            showDialogMessage(
+                it, "ok"
+            ) { dialog, which -> dialog.dismiss() }
+        }
+        viewModel.showProgressBar.observe(this) { showLoading ->
+            if (showLoading) {
+                loadingDialog.show(supportFragmentManager, "loading_dialog")
+            } else {
+                loadingDialog.dismiss()
+            }
+        }
     }
 
     abstract fun getLayoutId(): Int

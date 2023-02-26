@@ -20,7 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:elevation="0dp">
+            android:elevation="0dp"
+            android:outlineProvider="@null"
+            android:stateListAnimator="@null">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

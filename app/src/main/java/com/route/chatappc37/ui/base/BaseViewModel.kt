@@ -5,6 +5,6 @@ import androidx.lifecycle.ViewModel
 
 open class BaseViewModel<NAVIGATOR> : ViewModel() {
     val messageLiveData: MutableLiveData<String> = MutableLiveData()
-    val showProgressBar: MutableLiveData<Boolean> = MutableLiveData(false)
+    val showProgressBar: MutableLiveData<Boolean> = MutableLiveData()
     var navigator: NAVIGATOR? = null
 }
