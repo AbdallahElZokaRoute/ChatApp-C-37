@@ -6,6 +6,7 @@ data class Message(
     var id: String? = null,
     var content: String? = null,
     var senderId: String? = null,
+    var senderName: String? = null,
     var time: Long? = Date().time,
     var roomId: String? = null
 

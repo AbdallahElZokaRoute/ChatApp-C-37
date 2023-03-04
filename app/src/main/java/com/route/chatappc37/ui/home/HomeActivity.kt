@@ -49,7 +49,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), Navigat
 
     override fun onRoomClicked(room: Room, position: Int) {
         val intent = Intent(this@HomeActivity, ChatActivity::class.java)
-        intent.putExtra(Constants.ROOM_EXTRA, room)
+            .apply {
+                putExtra(Constants.ROOM_EXTRA, room)
+                return@apply
+            }
         startActivity(intent)
     }
 

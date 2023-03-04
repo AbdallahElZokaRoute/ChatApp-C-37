@@ -8,26 +8,46 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/message_content"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/received_message_bg"
-            android:padding="20dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/message_date"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/message_date"
+            android:id="@+id/sender_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf=""
+            android:layout_marginHorizontal="16dp"
+            android:textSize="16sp"
+
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="3:00PM" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Ahmed"
+
+            />
+
+        <LinearLayout
+            android:id="@+id/message_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/received_message_bg"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sender_name">
+
+            <TextView
+                android:id="@+id/message_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="@drawable/received_message_bg"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="helloWOrld" />
+
+            <TextView
+                android:id="@+id/message_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                tools:text="3:00PM" />
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

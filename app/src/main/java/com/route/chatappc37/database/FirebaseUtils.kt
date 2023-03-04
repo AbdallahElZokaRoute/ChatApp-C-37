@@ -2,10 +2,7 @@ package com.route.chatappc37.database
 
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import com.route.chatappc37.model.AppUser
 import com.route.chatappc37.model.Message
 import com.route.chatappc37.model.Room
@@ -80,8 +77,27 @@ fun addMessage(
 }
 
 fun getMessages(
+    roomId: String,
     onSuccessListener: OnSuccessListener<QuerySnapshot>,
     onFailureListener: OnFailureListener
 ) {
-    
+    getCollectionRef(Room.COLLECTION_NAME)
+        .document(roomId)
+        .collection(Message.COLLECTION_NAME)
+        .orderBy("time", Query.Direction.ASCENDING)
+        .get()
+        .addOnSuccessListener(onSuccessListener)
+        .addOnFailureListener(onFailureListener)
+
+}
+
+fun listenForMessagesChanges(
+    roomId: String,
+    snapShotListener: EventListener<QuerySnapshot>
+) {
+    getCollectionRef(Room.COLLECTION_NAME)
+        .document(roomId)
+        .collection(Message.COLLECTION_NAME)
+        .addSnapshotListener(snapShotListener)
+
 }

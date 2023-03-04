@@ -13,7 +13,7 @@ import com.route.chatappc37.model.Message
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MessagesAdapter(var messages: List<Message?>?) : Adapter<ViewHolder>() {
+class MessagesAdapter(var messages: MutableList<Message>?) : Adapter<ViewHolder>() {
     val SENT = 1
     val RECEIVED = 2
     override fun getItemViewType(position: Int): Int {
@@ -66,6 +66,17 @@ class MessagesAdapter(var messages: List<Message?>?) : Adapter<ViewHolder>() {
 //            val viewHolder = (holder as ReceivedViewHolder)
 //            viewHolder.bind(item!!)
 //        }
+    }
+
+    fun receivedNewMessage(message: Message) {
+        messages?.add(message)
+        notifyItemInserted(itemCount+1)
+
+    }
+
+    fun updateData(items: MutableList<Message>?) {
+        this.messages = items
+        notifyDataSetChanged()
     }
 
     class SentMessageViewHolder(val sentMessageBinding: ItemSendMessageBinding) :
